@@ -285,3 +285,30 @@ export const resetPassword = async (req, res) => {
     
   }
 }
+
+    const deletedUser = await User.destroy({where: {id: req.user}});
+        if(!deletedUser) {
+      return res.status(400).json({
+        success: false,
+        message: "Failed to delete account or user unauthorized"
+      })
+    }
+
+      res.clearCookie("authjwttoken");
+
+   
+   res.status(200).json({
+    success: true,
+    message: "Your account deleted successfully."
+   })
+    
+  } catch (error) {
+    console.log(`error while deleting account: ${error}`);
+    res.status(500).json({
+      success: false,
+      message: `server error : something went wrong ${error}`
+    })
+  }
+}
+
+
