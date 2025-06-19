@@ -286,7 +286,7 @@ export const resetPassword = async (req, res) => {
   }
 }
 
-    const deletedUser = await User.destroy({where: {id: req.user}});
+   export const deletedUser = await User.destroy({where: {id: req.user}});
         if(!deletedUser) {
       return res.status(400).json({
         success: false,
@@ -296,7 +296,6 @@ export const resetPassword = async (req, res) => {
 
       res.clearCookie("authjwttoken");
 
-   
    res.status(200).json({
     success: true,
     message: "Your account deleted successfully."
